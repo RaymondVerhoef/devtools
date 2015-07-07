@@ -27,7 +27,3 @@ For usage view
 ```
 > python create_fd.py -h
 ```
-
-## Help?!
-
-If you have any questions or suggestions (or run into a bug) feel free to create an issue on GitHub. Any pull requests/patches are also very welcome.
