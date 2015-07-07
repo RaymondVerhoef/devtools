@@ -8,13 +8,11 @@
 
 import json, pprint, requests, argparse, os, base64
 
-# Client secret - See developer.transfollow.com for information on how to obtain one.
-
 
 pp = pprint.PrettyPrinter(indent=4)
 parser = argparse.ArgumentParser(description="Creates a freight document on a given environment.")
 
-# 
+# Client secret - See developer.transfollow.com for information on how to obtain one.
 client_secret = "client_secret_goes_here"
 
 # There can only be one JSON source, a single file or a group of files
