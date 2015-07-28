@@ -32,9 +32,10 @@ if args.client_secret:
     client_secret = args.client_secret
 env = args.env
 env_map = {
-    "partner": "https://partner.transfollow.com",
-	"acceptance": "https://acceptance.transfollow.com",
-    "test": "https://test.transfollow.com"
+    "partner": "https://partner.transfollow.com/api",
+    "acceptance": "https://acceptance.transfollow.com/api",
+    "test": "https://test.transfollow.com/api",
+    "dev": "http://localhost:8080/v1"
 }
 
 class TransFollow:
@@ -51,7 +52,7 @@ class TransFollow:
 
     # Authenticates a given username and password
     def login(self, user, password):
-        url = "%s/api/oauth/token" % env_map[env]
+        url = "%s/oauth/token" % env_map[env]
         headers = {
             "Content-type": "application/x-www-form-urlencoded",
             "Accept": "application/json",
@@ -66,7 +67,7 @@ class TransFollow:
 
     # Creates a new Freight Document
     def create_fd(self, token, user, json_data):
-        url = "%s/api/freightdocuments" % env_map[env]
+        url = "%s/freightdocuments" % env_map[env]
         headers = {
             "Content-type": "application/json",
             "Accept": "application/json",
@@ -84,7 +85,7 @@ class TransFollow:
 
     # Creates a signing moment
     def sign_fd(self, token, fd_id, user):
-        url = "%s/api/freightdocuments/%s/submitmyapproval" % (env_map[env], fd_id)
+        url = "%s/freightdocuments/%s/submitmyapproval" % (env_map[env], fd_id)
         headers = {
             "Content-type": "application/json",
             "Accept": "application/json",
