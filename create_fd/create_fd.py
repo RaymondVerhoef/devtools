@@ -99,7 +99,7 @@ class TransFollow:
             "place":"city name",
             "previousCommits": [],
             "action": "COLLECTION",
-            "ownRole": "CONSIGNOR",
+            "ownRole": "CARRIER",
             "secondsSinceCreation": 99,
             "declined": True
         }
