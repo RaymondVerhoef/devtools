@@ -35,7 +35,7 @@ env_map = {
     "partner": "https://partner.transfollow.com/api",
     "acceptance": "https://acceptance.transfollow.com/api",
     "test": "https://test.transfollow.com/api",
-    "dev": "http://localhost:8080/v1"
+    "develop": "http://localhost:8080/v1"
 }
 
 class TransFollow:
@@ -100,7 +100,8 @@ class TransFollow:
             "previousCommits": [],
             "action": "COLLECTION",
             "ownRole": "CONSIGNOR",
-            "secondsSinceCreation": 99
+            "secondsSinceCreation": 99,
+            "declined": True
         }
         return json.loads(
             self.do_request(url=url, data=json.dumps(data), headers=headers)

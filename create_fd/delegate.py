@@ -29,7 +29,7 @@ env_map = {
     "partner": "https://partner.transfollow.com/api",
     "acceptance": "https://acceptance.transfollow.com/api",
     "test": "https://test.transfollow.com/api",
-    "dev": "http://localhost:8080/v1"
+    "develop": "http://localhost:8080/v1"
 }
 
 class TransFollow:
