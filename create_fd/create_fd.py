@@ -1,26 +1,34 @@
+#!/usr/bin/python
+
 ###
-# 
+#
 # Create Freight document helper
 #
 # See README.md in this directory for installation instructions.
 #
 ###
 
-import json, pprint, requests, argparse, os, base64
+import json, pprint, requests, argparse, os, base64, ConfigParser
 
 
 pp = pprint.PrettyPrinter(indent=4)
 parser = argparse.ArgumentParser(description="Creates a freight document on a given environment.")
 
+config = ConfigParser.RawConfigParser({'env': 'test', 'client_secret': 'Please set a secret'})
+config.add_section("settings")
+config.read([os.path.expanduser('~/.tfdevtools.ini')])
+
 # Client secret - See developer.transfollow.com for information on how to obtain one.
-client_secret = "client_secret_goes_here"
+client_secret = config.get("settings", "client-secret")
+env = config.get("settings", "env")
+
 
 # There can only be one JSON source, a single file or a group of files
 json_source = parser.add_mutually_exclusive_group(required=True)
 json_source.add_argument("--json_file", type=str, help="The JSON file to use for FD posting")
 json_source.add_argument("--json_dir", type=str, help="A directory containing JSON freight document files")
 
-parser.add_argument("--env", type=str, default="test", help="The target environment: test, acceptance or partner")
+parser.add_argument("--env", type=str, help="The target environment: test, acceptance or partner")
 parser.add_argument("--client_secret", type=str, help="The client secret, used to authenticate with the API service")
 parser.add_argument("--user", type=str, help="The existing user email address used to create the FD")
 parser.add_argument("--password", type=str, help="The existing user password used to create the FD")
@@ -30,7 +38,9 @@ args = parser.parse_args()
 
 if args.client_secret:
     client_secret = args.client_secret
-env = args.env
+if args.env:
+    env = args.env
+
 env_map = {
     "partner": "https://partner.transfollow.com/api",
     "acceptance": "https://acceptance.transfollow.com/api",
@@ -135,16 +145,26 @@ jl = JsonLoader()
 json_files = jl.load(json_dir=args.json_dir, json_file=args.json_file)
 
 if json_files:
-    login = tf.login(args.user, args.password)
-    print "User '%s' is now authenticated" % args.user
+    user = password = None
+    if config.has_option("settings", "user"):
+        user = config.get("settings", "user")
+    if args.user:
+        user = args.user
+    if config.has_option("settings", "password"):
+        password = config.get("settings", "password")
+    if args.password:
+        password = args.password
+
+    login = tf.login(user, password)
+    print "User '%s' is now authenticated" % user
 
     for json_data in json_files:
-        fd = tf.create_fd(token=login["access_token"], user=args.user, json_data=json_data)
+        fd = tf.create_fd(token=login["access_token"], user=user, json_data=json_data)
         fd_view_url = "%s/portal/#home,viewFreightDocument&id=" % env_map[env]
         print "Created new FD: %s%s" % (fd_view_url, fd["freightDocumentId"])
 
         if args.sign_fd:
-            sm = tf.sign_fd(token=login["access_token"], fd_id=fd["freightDocumentId"], user=args.user)
+            sm = tf.sign_fd(token=login["access_token"], fd_id=fd["freightDocumentId"], user=user)
             print "Signed document: %s" % sm
 elif not json_files and args.json_file:
     print "JSON file %s could not be loaded" % args.json_file
