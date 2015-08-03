@@ -16,7 +16,7 @@ config.add_section("settings")
 config.read([os.path.expanduser('~/.tfdevtools.ini')])
 
 # Client secret - See developer.transfollow.com for information on how to obtain one.
-client_secret = config.get("settings", "client-secret")
+client_secret = config.get("settings", "client_secret")
 env = config.get("settings", "env")
 
 parser.add_argument("--env", type=str, help="The target environment: test, acceptance or partner")

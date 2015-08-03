@@ -19,7 +19,7 @@ config.add_section("settings")
 config.read([os.path.expanduser('~/.tfdevtools.ini')])
 
 # Client secret - See developer.transfollow.com for information on how to obtain one.
-client_secret = config.get("settings", "client-secret")
+client_secret = config.get("settings", "client_secret")
 env = config.get("settings", "env")
 
 
@@ -42,10 +42,22 @@ if args.env:
     env = args.env
 
 env_map = {
-    "partner": "https://partner.transfollow.com/api",
-    "acceptance": "https://acceptance.transfollow.com/api",
-    "test": "https://test.transfollow.com/api",
-    "develop": "http://localhost:8080/v1"
+    "partner": {
+        'api': "https://partner.transfollow.com/api",
+        'portal':"https://partner.transfollow.com/portal"
+    },
+    "acceptance": {
+        'api': "https://acceptance.transfollow.com/api",
+        'portal':"https://acceptance.transfollow.com/portal"
+    },
+    "test": {
+        'api': "https://test.transfollow.com/api",
+        'portal':"https://test.transfollow.com/portal"
+    },
+    "develop":  {
+        'api': "http://localhost:8080/v1",
+        'portal':"http://localhost:9091"
+    },
 }
 
 class TransFollow:
@@ -62,7 +74,7 @@ class TransFollow:
 
     # Authenticates a given username and password
     def login(self, user, password):
-        url = "%s/oauth/token" % env_map[env]
+        url = "%s/oauth/token" % env_map[env]['api']
         headers = {
             "Content-type": "application/x-www-form-urlencoded",
             "Accept": "application/json",
@@ -77,7 +89,7 @@ class TransFollow:
 
     # Creates a new Freight Document
     def create_fd(self, token, user, json_data):
-        url = "%s/freightdocuments" % env_map[env]
+        url = "%s/freightdocuments" % env_map[env]['api']
         headers = {
             "Content-type": "application/json",
             "Accept": "application/json",
@@ -95,7 +107,7 @@ class TransFollow:
 
     # Creates a signing moment
     def sign_fd(self, token, fd_id, user):
-        url = "%s/freightdocuments/%s/submitmyapproval" % (env_map[env], fd_id)
+        url = "%s/freightdocuments/%s/submitmyapproval" % (env_map[env]['api'], fd_id)
         headers = {
             "Content-type": "application/json",
             "Accept": "application/json",
@@ -160,7 +172,7 @@ if json_files:
 
     for json_data in json_files:
         fd = tf.create_fd(token=login["access_token"], user=user, json_data=json_data)
-        fd_view_url = "%s/portal/#home,viewFreightDocument&id=" % env_map[env]
+        fd_view_url = "%s/#home,viewFreightDocument&id=" % env_map[env]['portal']
         print "Created new FD: %s%s" % (fd_view_url, fd["freightDocumentId"])
 
         if args.sign_fd:
