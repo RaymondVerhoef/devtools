@@ -1,21 +1,29 @@
+#!/usr/bin/python
 ###
-# 
+#
 # Create User
 #
 ###
 
-import json, pprint, requests, argparse, os, base64
+import json, pprint, requests, argparse, os, base64, ConfigParser
 
 
 pp = pprint.PrettyPrinter(indent=4)
 parser = argparse.ArgumentParser(description="Creates a freight document on a given environment.")
 
-parser.add_argument("--env", type=str, default="test", help="The target environment: test, acceptance or partner")
+parser.add_argument("--env", type=str, help="The target environment: test, acceptance or partner")
 parser.add_argument("--user", type=str, help="The existing user email address used to create the FD")
 parser.add_argument("--password", type=str, help="The existing user password used to create the FD")
 args = parser.parse_args()
 
-env = args.env
+config = ConfigParser.RawConfigParser({'env': 'test'})
+config.add_section("settings")
+config.read([os.path.expanduser('~/.tfdevtools.ini')])
+
+env = config.get("settings", "env")
+if args.env:
+    env = args.env
+
 env_map = {
     "partner": "https://partner.transfollow.com/api",
     "acceptance": "https://acceptance.transfollow.com/api",
@@ -48,7 +56,7 @@ class TransFollow:
             "password": password,
             "phoneNumber": "0306997020",
             "email": user,
-            "name": user, 
+            "name": user,
             "acceptTermsAndConditions": "true"
         }
 
