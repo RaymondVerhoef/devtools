@@ -14,6 +14,7 @@ parser = argparse.ArgumentParser(description="Creates a freight document on a gi
 parser.add_argument("--env", type=str, help="The target environment: test, acceptance or partner")
 parser.add_argument("--user", type=str, help="The existing user email address used to create the FD")
 parser.add_argument("--password", type=str, help="The existing user password used to create the FD")
+parser.add_argument("--name", type=str, help="Optional name for the user; the email-address is used if not supplied")
 args = parser.parse_args()
 
 config = ConfigParser.RawConfigParser({'env': 'test'})
@@ -44,7 +45,7 @@ class TransFollow:
             print e.read()
 
     # Creates a new Freight Document
-    def create_user(self, user, password):
+    def create_user(self, email, name, password):
         url = "%s/test/accounts/users" % env_map[env]
         headers = {
             "Content-type": "application/json",
@@ -55,8 +56,8 @@ class TransFollow:
         json_data = {
             "password": password,
             "phoneNumber": "0306997020",
-            "email": user,
-            "name": user,
+            "email": email,
+            "name": name,
             "acceptTermsAndConditions": "true"
         }
 
@@ -67,5 +68,5 @@ class TransFollow:
 
 tf = TransFollow()
 
-user = tf.create_user(user=args.user, password=args.password)
+user = tf.create_user(name=args.name if args.name else args.user, email=args.user, password=args.password)
 pprint.pprint(user)
