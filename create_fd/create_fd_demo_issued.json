@@ -6,12 +6,12 @@
     },
     {
       "name": "DOCUMENT REFERENCE 2",
-      "value": "2015/08 DM"
+      "value": "2015/33 SPR"
     }
   ],
   "type": "WAYBILL",
   "consignor": {
-    "name": "R. Postma",
+    "name": "P. Postma",
     "streetName": "Kerkstraat",
     "buildingNumber": "1",
     "postalCode": "1234AA",
@@ -25,7 +25,7 @@
     "contactPhoneNumber": "0123456789",
     "accountId": "",
     "submittedAccountNumber": "",
-    "submittedAccountEmailAddress": "r.postma@stryyon.com"
+    "submittedAccountEmailAddress": "postma@stryyon.com"
   },
   "consignee": {
     "name": "E. Huisman",
@@ -93,7 +93,7 @@
   "estimatedDateTimeOfTakingOver": "2015-08-01T12:00:00Z",
   "estimatedDateTimeOfDelivery": "2015-08-03T12:00:00Z",
   "establishedDate": "2015-08-10",
-  "establishedPlace": "London",
+  "establishedPlace": "Nootdorp",
   "reimbursementCurrency": "EUR",
   "reimbursementAmount": 123.55 ,
   "paymentForCarriage": "CARRIAGE_PAID",
@@ -116,7 +116,8 @@
       "contactName": "S. de Jong",
       "contactNote": "Rijdt met een kapotte uitlaat",
       "contactEmailAddress": "dejong@uniport.nl",
-      "contactPhoneNumber": "0031102346790"
+      "contactPhoneNumber": "0031102346790",
+      "submittedAccountEmailAddress": ""
     }
   ]
 }
