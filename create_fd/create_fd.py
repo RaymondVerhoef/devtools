@@ -34,6 +34,7 @@ parser.add_argument("--user", type=str, help="The existing user email address us
 parser.add_argument("--password", type=str, help="The existing user password used to create the FD")
 parser.add_argument("--one_user", action="store_true", help="Sets all the role email addresses to the user used for authentication, overriding the JSON addresses")
 parser.add_argument("--sign_fd", action="store_true", help="Signs the freight document. Note that the user needs to have signing permission. Generally this means the carrier.")
+parser.add_argument("--attachment", type=str, help="Optional attachment for the freight document")
 args = parser.parse_args()
 
 if args.client_secret:
@@ -100,6 +101,16 @@ class TransFollow:
             json_data["consignor"]["submittedAccountEmailAddress"] = user
             json_data["consignee"]["submittedAccountEmailAddress"] = user
             json_data["carrier"]["submittedAccountEmailAddress"] = user
+            
+        if args.attachment:
+	    attachment = open(args.attachment).read()
+	    json_data["attachments"] = [{
+		"originalFileName": os.path.basename(args.attachment),
+		"content": base64.b64encode(attachment),
+		"sealed": False,
+		"type": "GENERAL"
+	    }]
+	      
 
         return json.loads(
             self.do_request(url=url, data=json.dumps(json_data), headers=headers)
