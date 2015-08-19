@@ -8,7 +8,7 @@
 #
 ###
 
-import json, pprint, requests, argparse, os, base64, ConfigParser
+import json, pprint, requests, argparse, os, base64, ConfigParser, datetime
 
 
 pp = pprint.PrettyPrinter(indent=4)
@@ -35,6 +35,8 @@ parser.add_argument("--password", type=str, help="The existing user password use
 parser.add_argument("--one_user", action="store_true", help="Sets all the role email addresses to the user used for authentication, overriding the JSON addresses")
 parser.add_argument("--sign_fd", action="store_true", help="Signs the freight document. Note that the user needs to have signing permission. Generally this means the carrier.")
 parser.add_argument("--attachment", type=str, help="Optional attachment for the freight document")
+parser.add_argument("--today", action="store_true", help="Set all dates to today")
+
 args = parser.parse_args()
 
 if args.client_secret:
@@ -110,6 +112,15 @@ class TransFollow:
 		"sealed": False,
 		"type": "GENERAL"
 	    }]
+	    
+	if args.today:
+	    today = datetime.date.today().isoformat()
+	    json_data["agreedDateOfTakingOver"]=json_data["establishedDate"] = today
+	    now = datetime.datetime.now().isoformat('T')
+	    json_data["estimatedDateTimeOfDelivery"] = now
+    	    earlier = (datetime.datetime.now() - datetime.timedelta(hours=1)).isoformat('T')
+	    json_data["estimatedDateTimeOfTakingOver"] = earlier
+	  
 	      
 
         return json.loads(
