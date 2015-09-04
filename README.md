@@ -2,7 +2,7 @@
 Repository containing several tools for developers creating applications to integrate with the TransFollow.org platform.
 
 ## Configuration
-Global configuration from the tools is read from the ~/.tfconfig.ini file, which has the following format:
+Global configuration from the tools is read from the ~/.tfdevtools.ini file, which has the following format:
 
 '''
 [settings]
