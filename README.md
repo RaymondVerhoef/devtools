@@ -1,6 +1,22 @@
 # devtools
 Repository containing several tools for developers creating applications to integrate with the TransFollow.org platform.
 
+## Installation
+
+Checkout this repository to any machine that has python installed.
+
+To be able to use this utility you will need two non-standard python libraries:
+* requests
+* requests[security]
+
+It is recommended to use pip to install these depencencies, see:
+https://pypi.python.org/pypi/pip
+
+Commonly you would end up running these 3 commands:
+> sudo easy_install pip
+> sudo pip install requests
+> sudo pip install requests[security]
+
 ## Configuration
 Global configuration from the tools is read from the ~/.tfdevtools.ini file, which has the following format:
 

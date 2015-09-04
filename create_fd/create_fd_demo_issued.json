@@ -1,0 +1,123 @@
+{
+  "references": [
+    {
+      "name": "DOCUMENT REFERENCE 1",
+      "value": "RFN 137"
+    },
+    {
+      "name": "DOCUMENT REFERENCE 2",
+      "value": "2015/33 SPR"
+    }
+  ],
+  "type": "WAYBILL",
+  "consignor": {
+    "name": "P. Postma",
+    "streetName": "Kerkstraat",
+    "buildingNumber": "1",
+    "postalCode": "1234AA",
+    "postalBox": "POstbus 1234",
+    "cityName": "Nootdorp",
+    "countryName": "Netherlands",
+    "countryCode": "NLD",
+    "contactName": "W. Groen",
+    "contactNote": "Afdeling Verzending",
+    "contactEmailAddress": "w.groen@stryyon.com",
+    "contactPhoneNumber": "0123456789",
+    "accountId": "",
+    "submittedAccountNumber": "",
+    "submittedAccountEmailAddress": "postma@stryyon.com"
+  },
+  "consignee": {
+    "name": "E. Huisman",
+    "streetName": "Rubensplein",
+    "buildingNumber": "2",
+    "postalCode": "5678AA",
+    "postalBox": "Postbus 5678",
+    "cityName": "Utrecht",
+    "countryName": "Netherlands",
+    "countryCode": "NLD",
+    "contactName": "O. Schrijver",
+    "contactNote": "Afdeling Ontvangst",
+    "contactEmailAddress": "o.schrijver@heuz.com",
+    "contactPhoneNumber": "0987654321",
+    "accountId": "",
+    "submittedAccountNumber": "",
+    "submittedAccountEmailAddress": "huisman@heuz.com"
+  },
+  "placeOfTakingOver": {
+    "name": "P. O. de Ruiter",
+    "streetName": "Overslag",
+    "buildingNumber": "8",
+    "postalCode": "4567EF",
+    "postalBox": "Postbus 456",
+    "cityName": "Amsterdam",
+    "countryName": "Netherlands",
+    "countryCode": "NLD",
+    "contactName": "A. Grijp",
+    "contactNote": "Niet aanbellen na 18:00",
+    "contactEmailAddress": "grijp@ierko.com",
+    "contactPhoneNumber": "0031632547698"
+  },
+  "placeOfDelivery": {
+    "name": "P. D. Deli",
+    "streetName": "Stephensonplein",
+    "buildingNumber": "12",
+    "postalCode": "1111AA",
+    "postalBox": "Postbus 1111",
+    "cityName": "Emmen",
+    "countryName": "Netherlands",
+    "countryCode": "NLD",
+    "contactName": "D. Young",
+    "contactNote": "Geen aflevering op vrijdag",
+    "contactEmailAddress": "d.y@foixx.com",
+    "contactPhoneNumber": "0031686535762"
+  },
+  "carrier": {
+    "name": "Schipper Exports",
+    "streetName": "Unidreef",
+    "buildingNumber": "3",
+    "postalCode": "9012AA",
+    "postalBox": "Postbus 9012",
+    "cityName": "Hillegom",
+    "countryName": "Netherlands",
+    "countryCode": "NLD",
+    "contactName": "C. Schipper",
+    "contactNote": "Bij geen gehoor op vaste lijn, probeer mobiel",
+    "contactEmailAddress": "schipper@xport.nl",
+    "contactPhoneNumber": "0123443212",
+    "accountId": "",
+    "submittedAccountNumber": "",
+    "submittedAccountEmailAddress": "maas@transfollow.com"
+  },
+  "agreedDateOfTakingOver": "2015-08-01",
+  "estimatedDateTimeOfTakingOver": "2015-08-01T12:00:00Z",
+  "estimatedDateTimeOfDelivery": "2015-08-03T12:00:00Z",
+  "establishedDate": "2015-08-10",
+  "establishedPlace": "Nootdorp",
+  "reimbursementCurrency": "EUR",
+  "reimbursementAmount": 123.55 ,
+  "paymentForCarriage": "CARRIAGE_PAID",
+  "goods": "TransFollow tasje met drie folders en een blocnote",
+  "senderInstructions": "Breekbare goederen",
+  "specialAgreements": "Tekenen bij afleveren",
+  "transportConditions": "AVC2002",
+  "attachments": [],
+  "status": "ISSUED",
+  "subsequentCarriers": [
+    {
+      "name": "Universal Imports",
+      "streetName": "Leidsestraat",
+      "buildingNumber": "1337A",
+      "postalCode": "6789KL",
+      "postalBox": "Postbus 678",
+      "cityName": "Amsterdam",
+      "countryName": "Nederland",
+      "countryCode": "NLD",
+      "contactName": "S. de Jong",
+      "contactNote": "Rijdt met een kapotte uitlaat",
+      "contactEmailAddress": "dejong@uniport.nl",
+      "contactPhoneNumber": "0031102346790",
+      "submittedAccountEmailAddress": ""
+    }
+  ]
+}
